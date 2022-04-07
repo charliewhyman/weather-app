@@ -1,11 +1,13 @@
 'use strict';
 
 //create a function to call the openweathermap api for a specified location, and return the json response
-function fetchForecast(location) {
+function fetchForecast(location, units) {
   fetch(
     'https://api.openweathermap.org/data/2.5/weather?q=' +
       location +
-      '&APPID=5c143252ea13f0491b20a257f49ac149',
+      '&APPID=5c143252ea13f0491b20a257f49ac149' +
+      '&units=' +
+      units,
     { mode: 'cors' }
   )
     .then(function (response) {
@@ -17,8 +19,10 @@ function fetchForecast(location) {
     });
 }
 
-//test the function with a location of 'London'
-fetchForecast('London');
+//test the function with a location of 'London' and metric units
+let testLocation = 'London';
+let testUnits = 'metric';
+fetchForecast(testLocation, testUnits);
 
 //create a function to take the json response and create an object containing the data to be displayed in the app
 function processForecast(forecast) {
