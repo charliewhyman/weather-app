@@ -22,5 +22,18 @@ fetchForecast('London');
 
 //create a function to take the json response and create an object containing the data to be displayed in the app
 function processForecast(forecast) {
-  console.log(forecast.main);
+  let forecastObject = {
+    location: forecast.name,
+    currentTemp: forecast.main.temp,
+    feelsLike: forecast.main.feels_like,
+    maxTemp: forecast.main.temp_max,
+    minTemp: forecast.main.temp_min,
+    weatherShort: forecast.weather[0].main,
+    weatherLong: forecast.weather[0].description,
+    windSpeed: forecast.wind.speed,
+    sunrise: forecast.sys.sunrise,
+    sunset: forecast.sys.sunset,
+  };
+  console.log(forecastObject);
+  return forecastObject;
 }
