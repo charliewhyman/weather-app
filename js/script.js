@@ -1,10 +1,31 @@
 'use strict';
 
+//get the user input from the search bar
+let searchBox = document.getElementById('locationSearch');
+let searchForm = document.getElementById('form');
+
+//set an initial location to search
+let searchLocation = searchBox.value;
+
+//set the units
+let units = 'metric';
+
+searchForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  getSearchValue();
+});
+
+function getSearchValue() {
+  searchLocation = searchBox.value;
+  console.log(searchLocation);
+  fetchForecast(searchLocation, units);
+}
+
 //create a function to call the openweathermap api for a specified location, and return the json response
-function fetchForecast(location, units) {
+function fetchForecast(searchLocation, units) {
   fetch(
     'https://api.openweathermap.org/data/2.5/weather?q=' +
-      location +
+      searchLocation +
       '&APPID=5c143252ea13f0491b20a257f49ac149' +
       '&units=' +
       units,
@@ -14,20 +35,14 @@ function fetchForecast(location, units) {
       return response.json();
     })
     .then(function (response) {
-      console.log(response);
       processForecast(response);
     });
 }
 
-//test the function with a location of 'London' and metric units
-let testLocation = 'London';
-let testUnits = 'metric';
-fetchForecast(testLocation, testUnits);
-
 //create a function to take the json response and create an object containing the data to be displayed in the app
 function processForecast(forecast) {
   let forecastObject = {
-    location: forecast.name,
+    searchLocation: forecast.name,
     currentTemp: forecast.main.temp,
     feelsLike: forecast.main.feels_like,
     maxTemp: forecast.main.temp_max,

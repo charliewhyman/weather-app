@@ -3,7 +3,7 @@
 
 <head>
 
-  <meta name='description' content='Weather App' />
+  <meta name='description' content='Weather App'/>
   <meta charset='utf-8'>
   <title>Weather App</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -13,6 +13,11 @@
 </head>
 
 <body>
+  <form id='form' onsubmit='return false'>
+    <label for='locationSearch'>Search the site:</label>
+    <input type='search' id='locationSearch'>
+    <input type='submit' id='searchButton'>Search location</input>
+  </form>
   <script src='js/script.js'></script>
 </body>
 </html>
