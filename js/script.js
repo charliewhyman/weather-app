@@ -1,5 +1,6 @@
 'use strict';
 
+//PARAMETERS
 //get the user input from the search bar
 let searchBox = document.getElementById('locationSearch');
 let searchForm = document.getElementById('form');
@@ -10,11 +11,9 @@ let searchLocation = searchBox.value;
 //set the units
 let units = 'metric';
 
-searchForm.addEventListener('submit', function (event) {
-  event.preventDefault();
-  getSearchValue();
-});
+//LOGIC FUNCTIONS
 
+//create a function to get the user input from the search box
 function getSearchValue() {
   searchLocation = searchBox.value;
   console.log(searchLocation);
@@ -36,6 +35,9 @@ function fetchForecast(searchLocation, units) {
     })
     .then(function (response) {
       processForecast(response);
+    })
+    .catch(function (err) {
+      console.log('Location not found!');
     });
 }
 
@@ -56,3 +58,11 @@ function processForecast(forecast) {
   console.log(forecastObject);
   return forecastObject;
 }
+
+//UI
+
+//EVENT LISTENERS
+searchForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  getSearchValue();
+});
