@@ -6,17 +6,36 @@ let searchBox = document.getElementById('locationSearch');
 let searchForm = document.getElementById('form');
 
 //set an initial location to search
-let searchLocation = searchBox.value;
+let searchLocation = 'London';
+searchBox.value = searchLocation;
 
 //set the units
 let units = 'metric';
+let temperatureUnits = '°C';
+let speedUnits = 'kph';
+
+const unitSelect = document.getElementById('unitSelect');
+
+//set units depending on user selection
+function setUnits() {
+  if (unitSelect.options[unitSelect.selectedIndex].value === 'metric') {
+    units = 'metric';
+    temperatureUnits = '°C';
+    speedUnits = 'kph';
+  } else {
+    units = 'imperial';
+    temperatureUnits = '°F';
+    speedUnits = 'mph';
+  }
+}
+
+setUnits();
 
 //LOGIC FUNCTIONS
 
 //create a function to get the user input from the search box
-function getSearchValue() {
+function searchWeather() {
   searchLocation = searchBox.value;
-  console.log(searchLocation);
   fetchForecast(searchLocation, units);
 }
 
@@ -37,7 +56,7 @@ function fetchForecast(searchLocation, units) {
       processForecast(response);
     })
     .catch(function (err) {
-      console.log('Location not found!');
+      console.log(err);
     });
 }
 
@@ -45,24 +64,44 @@ function fetchForecast(searchLocation, units) {
 function processForecast(forecast) {
   let forecastObject = {
     searchLocation: forecast.name,
-    currentTemp: forecast.main.temp,
-    feelsLike: forecast.main.feels_like,
-    maxTemp: forecast.main.temp_max,
-    minTemp: forecast.main.temp_min,
+    currentTemp: Math.round(forecast.main.temp * 10) / 10,
+    feelsLike: Math.round(forecast.main.feels_like * 10) / 10,
+    maxTemp: Math.round(forecast.main.temp_max * 10) / 10,
+    minTemp: Math.round(forecast.main.temp_min * 10) / 10,
     weatherShort: forecast.weather[0].main,
     weatherLong: forecast.weather[0].description,
-    windSpeed: forecast.wind.speed,
-    sunrise: forecast.sys.sunrise,
-    sunset: forecast.sys.sunset,
+    windSpeed: Math.round(forecast.wind.speed * 10) / 10,
+    sunrise: forecast.sys.sunrise * 1000,
+    sunset: forecast.sys.sunset * 1000,
   };
   console.log(forecastObject);
+  populateUserInterface(forecastObject);
+
   return forecastObject;
 }
 
 //UI
+function populateUserInterface(returnedForecastObject) {
+  maxTempText.textContent = returnedForecastObject.maxTemp + temperatureUnits;
+  minTempText.textContent = returnedForecastObject.minTemp + temperatureUnits;
+  mainTempText.textContent =
+    returnedForecastObject.currentTemp + temperatureUnits;
+  feelsLikeText.textContent =
+    'Feels like ' + returnedForecastObject.feelsLike + temperatureUnits;
+
+  descriptionText.textContent = returnedForecastObject.weatherLong;
+  windText.textContent = returnedForecastObject.windSpeed + speedUnits;
+
+  sunriseTime.textContent = returnedForecastObject.sunrise;
+  sunsetTime.textContent = returnedForecastObject.sunset;
+}
 
 //EVENT LISTENERS
 searchForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  getSearchValue();
+  searchWeather();
 });
+
+//re-process on unit change
+
+searchWeather();

@@ -21,13 +21,38 @@
   </div>
   <div id='searchDiv' class='body'>
     <form id='form' onsubmit='return false'>
-      <label for='locationSearch'>Search the site:</label>
       <input type='search' id='locationSearch'>
       <button type='submit' id='searchButton'>Search location</button>
     </form>
   </div>
+  <div unitSelectDiv>
+    <label for='unitSelect'>Units: </label>
+    <select id='unitSelect'>
+      <option value='metric' select='selected'>Metric</option>
+      <option value='imperial'>Imperial</option>
+    </select>
+  </div>
   <div id='returnDiv' class='body'>
-    
+    <div id='minMaxTempDiv' class='body'>
+      <a id='maxTempLabel'>Max Temp: </a>
+      <a id='maxTempText'></a>
+      <a id='minTempLabel'>Min Temp: </a>
+      <a id='minTempText'></a>
+    </div>
+    <div id='mainTempDiv' class='body'>
+      <a id='mainTempText'></a>
+      <a id='feelsLikeText'></a>
+    </div>
+  <div id='descriptionDiv' class='body'>
+    <a id='descriptionText'></a>
+    <a id='windText'></a>
+  </div>
+  <div id='sunriseSunsetDiv'>
+    <img>
+    <a id='sunriseTime'></a>
+    <img>
+    <a id='sunsetTime'></a>
+  </div>
   </div>
   
   <script src='js/script.js'></script>
