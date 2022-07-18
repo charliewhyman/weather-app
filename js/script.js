@@ -71,13 +71,30 @@ function processForecast(forecast) {
     weatherShort: forecast.weather[0].main,
     weatherLong: forecast.weather[0].description,
     windSpeed: Math.round(forecast.wind.speed * 10) / 10,
-    sunrise: forecast.sys.sunrise * 1000,
-    sunset: forecast.sys.sunset * 1000,
+    sunrise: convertTimestamp(forecast.sys.sunrise, forecast.timezone),
+    sunset: convertTimestamp(forecast.sys.sunset, forecast.timezone),
   };
   console.log(forecastObject);
   populateUserInterface(forecastObject);
 
   return forecastObject;
+}
+
+//function to convert unix timestamps to js times
+
+function convertTimestamp(timestamp, timezoneOffset) {
+  console.log(timestamp);
+  console.log(timezoneOffset);
+  let localTimestamp = timestamp + timezoneOffset;
+  let date = new Date(localTimestamp * 1000);
+
+  date
+    .toLocaleTimeString('en-GB', {
+      timeZoneName: 'short',
+    })
+    .replace(',', '');
+
+  return date;
 }
 
 //UI
