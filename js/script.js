@@ -83,18 +83,15 @@ function processForecast(forecast) {
 //function to convert unix timestamps to js times
 
 function convertTimestamp(timestamp, timezoneOffset) {
-  console.log(timestamp);
-  console.log(timezoneOffset);
-  let localTimestamp = timestamp + timezoneOffset;
-  let date = new Date(localTimestamp * 1000);
+  let localTimestamp = (timestamp + timezoneOffset) * 1000;
+  let date = new Date(localTimestamp);
 
-  date
-    .toLocaleTimeString('en-GB', {
-      timeZoneName: 'short',
-    })
-    .replace(',', '');
+  let hours = String(date.getUTCHours()).padStart(2, '0');
+  let minutes = String(date.getUTCMinutes()).padStart(2, '0');
 
-  return date;
+  let shortTime = hours + ':' + minutes;
+
+  return shortTime;
 }
 
 //UI
