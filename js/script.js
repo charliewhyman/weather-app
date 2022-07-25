@@ -64,13 +64,13 @@ function fetchForecast(searchLocation, units) {
 function processForecast(forecast) {
   let forecastObject = {
     searchLocation: forecast.name,
-    currentTemp: Math.round(forecast.main.temp * 10) / 10,
-    feelsLike: Math.round(forecast.main.feels_like * 10) / 10,
-    maxTemp: Math.round(forecast.main.temp_max * 10) / 10,
-    minTemp: Math.round(forecast.main.temp_min * 10) / 10,
+    currentTemp: Math.round(forecast.main.temp),
+    feelsLike: Math.round(forecast.main.feels_like),
+    maxTemp: Math.round(forecast.main.temp_max),
+    minTemp: Math.round(forecast.main.temp_min),
     weatherShort: forecast.weather[0].main,
     weatherLong: forecast.weather[0].description,
-    windSpeed: Math.round(forecast.wind.speed * 10) / 10,
+    windSpeed: Math.round(forecast.wind.speed),
     sunrise: convertTimestamp(forecast.sys.sunrise, forecast.timezone),
     sunset: convertTimestamp(forecast.sys.sunset, forecast.timezone),
   };
