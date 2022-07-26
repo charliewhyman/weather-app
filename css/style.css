@@ -31,8 +31,13 @@ body {
   align-items: center;
 }
 
+#mainTempDiv {
+  padding: 1%;
+}
+
 #mainTempText {
   font-size: x-large;
+  font-weight: bold;
 }
 
 #feelsLikeText {

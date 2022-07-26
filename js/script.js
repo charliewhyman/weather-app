@@ -108,6 +108,47 @@ function populateUserInterface(returnedForecastObject) {
 
   sunriseTime.textContent = returnedForecastObject.sunrise;
   sunsetTime.textContent = returnedForecastObject.sunset;
+  setTextColor(returnedForecastObject.currentTemp, units);
+}
+
+//set text color based on temperature
+
+function setTextColor(temperature, units) {
+  let mainTempText = document.getElementById('mainTempText');
+  let textColor = 'black';
+  //if the units are fahrenheit, convert to metric
+  if (units === 'imperial') {
+    temperature = (temperature - 32) * (5 / 9);
+  } else {
+    // do nothing
+  }
+
+  // change the color scale based on the main temperature
+  switch (textColor) {
+    case temperature < 0:
+      textColor = '#2166ac';
+      break;
+    case temperature < 5:
+      textColor = '#67a9cf';
+      break;
+    case temperature < 10:
+      textColor = '#d1e5f0';
+      break;
+    case temperature < 15:
+      textColor = '#f7f7f7';
+      break;
+    case temperature < 20:
+      textColor = 'fddbc7';
+      break;
+    case temperature < 25:
+      textColor = '#ef8a62';
+      break;
+    default:
+      textColor = '#b2182b';
+      break;
+  }
+  //change the text colour of the main div
+  mainTempText.style.color = textColor;
 }
 
 //EVENT LISTENERS
