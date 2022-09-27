@@ -96,18 +96,16 @@ function convertTimestamp(timestamp, timezoneOffset) {
 
 //UI
 function populateUserInterface(returnedForecastObject) {
-  maxTempText.textContent = returnedForecastObject.maxTemp + temperatureUnits;
-  minTempText.textContent = returnedForecastObject.minTemp + temperatureUnits;
-  mainTempText.textContent =
-    returnedForecastObject.currentTemp + temperatureUnits;
+  maxTempText.textContent = 'High: '+returnedForecastObject.maxTemp + temperatureUnits;
+  minTempText.textContent = 'Low: '+returnedForecastObject.minTemp + temperatureUnits;
+  
   feelsLikeText.textContent =
     'Feels like ' + returnedForecastObject.feelsLike + temperatureUnits;
 
-  descriptionText.textContent = returnedForecastObject.weatherLong;
-  windText.textContent = returnedForecastObject.windSpeed + speedUnits;
+  descriptionText.textContent = returnedForecastObject.currentTemp + temperatureUnits + ', '+ returnedForecastObject.weatherLong;
 
-  sunriseTime.textContent = returnedForecastObject.sunrise;
-  sunsetTime.textContent = returnedForecastObject.sunset;
+  sunriseTime.textContent = 'Sunrise: '+returnedForecastObject.sunrise;
+  sunsetTime.textContent = 'Sunset: '+returnedForecastObject.sunset;
   setTextColor(returnedForecastObject.currentTemp, units);
 }
 

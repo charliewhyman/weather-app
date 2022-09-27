@@ -14,7 +14,7 @@
 
 <body>
   <div class='header'>
-    <a>WeatherApp</a>
+    <a>what's the weather?</a>
     <div>
 
     </div>
@@ -24,11 +24,13 @@
       <input type='search' id='locationSearch'>
       <button type='submit' id='searchButton'>Search location</button>
     </form>
+    <div id='unitDiv' class='body'>
     <label for='unitSelect'>Units: </label>
     <select id='unitSelect'>
       <option value='metric' select='selected'>Metric</option>
       <option value='imperial'>Imperial</option>
     </select>
+  </div>
   </div>
   <div id='returnDiv' class='body'>
     <div id='descriptionDiv' class='body'>
@@ -45,15 +47,15 @@
     <div id='windDiv' class='body'>
       <a id='windText'></a>
     </div>
+    <div id='sunriseSunsetDiv'>
+      <img>
+      <a id='sunriseTime'></a>
+      <img>
+      <a id='sunsetTime'></a>
+    </div>
+    </div>
+  </div>
   
-  </div>
-  <div id='sunriseSunsetDiv'>
-    <img>
-    <a id='sunriseTime'></a>
-    <img>
-    <a id='sunsetTime'></a>
-  </div>
-  </div>
   
   <script src='js/script.js'></script>
 </body>
